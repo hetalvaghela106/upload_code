@@ -12,8 +12,9 @@ Select image :
 
 </form>
 <?php
-  header("Content-Type: text/html; charset=utf-8");
-
+ // header("Content-Type: text/html; charset=utf-8");
+use Aws\S3\S3Client;
+use Aws\S3\Exception\S3Exception;
  if(isset($_POST['Submit1']))
 { 
 $file_tmp = $_FILES['file']['tmp_name'];
@@ -32,13 +33,16 @@ $filepath = "img/" . $_FILES["file"]["name"];
             $result = $s3->putObject([
                 'Bucket' => 'phpupload1',
                 'Key'    => $file_name,
-                'SourceFile' => $file_tmp
+                'SourceFile' => $file_tmp,
+                 'ACL'       => 'public-read',
+
             ]);
             var_dump($result);
-        } catch (Aws\S3\Exception\S3Exception $e) {
-            echo "There was an error uploading the file.\n";
-        }
-		;
+        } 
+		catch (S3Exception $e) {
+    // Catch an S3 specific exception.
+    echo $e->getMessage();
+}
 $up=move_uploaded_file($file_tmp, $filepath);
   copy($file_tmp, $filepath);
 
