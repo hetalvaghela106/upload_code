@@ -4,7 +4,7 @@
 </head>
 <body>
 
-<form action="file_upload.php" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+<form action="http://phpfileupload-env.eba-mqfgsjnm.us-east-1.elasticbeanstalk.com/file_upload.php" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 Select image :
 <input type="file" name="file"><br/>
 <input type="submit" value="Upload" name="Submit1"> <br/>
